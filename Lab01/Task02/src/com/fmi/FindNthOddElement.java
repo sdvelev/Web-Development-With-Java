@@ -5,11 +5,9 @@ public class FindNthOddElement {
     public static int findNthOddElementInArray(int [] arr, int n) {
 
         int counter = 0;
-
         for (int i = 0; i < arr.length; i++) {
 
             if (arr[i] % 2 != 0) {
-
                 if (++counter == n) {
                     return arr[i];
                 }
