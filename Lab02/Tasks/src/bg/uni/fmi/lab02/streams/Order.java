@@ -143,7 +143,6 @@ public class Order {
     }
 
     public boolean isActive() {
-
         return this.orderStatus == OrderStatus.ACTIVE;
     }
 

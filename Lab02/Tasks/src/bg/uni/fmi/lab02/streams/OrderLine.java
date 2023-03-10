@@ -3,6 +3,8 @@ package bg.uni.fmi.lab02.streams;
 import bg.uni.fmi.lab02.streams.entity.Item;
 import bg.uni.fmi.lab02.streams.vo.OrderLineStatus;
 
+import java.util.Objects;
+
 public class OrderLine {
 
     private Item item;
@@ -47,5 +49,28 @@ public class OrderLine {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderLine orderLine = (OrderLine) o;
+        return item.equals(orderLine.item);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(item);
+    }
+
+    @Override
+    public String toString() {
+        return "OrderLine{" +
+            "item=" + item +
+            ", orderLineStatus=" + orderLineStatus +
+            ", specialOffer=" + specialOffer +
+            ", count=" + count +
+            '}';
     }
 }
