@@ -19,10 +19,13 @@ public class FindNthOddElement {
 
     public static void main(String[] args) {
 
-        int arr[] = {1, 2, 45, 654, 345, 5445, 35};
+        int[] arrayFirst = {1, 2, 45, 654, 345, 5445, 35};
+        int[] arraySecond = {5, 3, 8, 1, 9};
 
-        int n = 4;
+        int nFirst = 4;
+        int nSecond = 5;
 
-        System.out.println(findNthOddElementInArray(arr, n));
+        System.out.println(findNthOddElementInArray(arrayFirst, nFirst));
+        System.out.println(findNthOddElementInArray(arraySecond, nSecond));
     }
 }

@@ -16,37 +16,30 @@ public class FMIDate {
     }
 
     public boolean isLeapYear() {
-
         if (year % 400 == 0) {
             return true;
         } else if (year % 100 == 0) {
             return  false;
-        } else if (year % 4 == 0) {
-            return true;
         } else {
-            return false;
+            return year % 4 == 0;
         }
     }
 
     public int getCentury() {
-
         return year / 100 + 1;
     }
 
     public long getDaysDifference(FMIDate other) {
-
         return Duration.
             between(LocalDateTime.of(year, month, day, 0, 0, 0), LocalDateTime.of(other.year,
                 other.month, other.day, 0, 0, 0)).toDays() + 1;
     }
 
     public void printInfo() {
-
         String result = year + " " + String.format("%02d", month) + " " + String.format("%02d", day) + " - " +
             getCentury() + " century.";
 
         if (isLeapYear()) {
-
             result += "It is a LEAP year";
         }
 
