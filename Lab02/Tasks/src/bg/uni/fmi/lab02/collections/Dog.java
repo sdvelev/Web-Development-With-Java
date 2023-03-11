@@ -10,19 +10,19 @@ public class Dog {
         this.weight = weight;
     }
 
-    @Override
-    public String toString() {
-        return "Dog{" +
-            "breed=" + breed +
-            ", weight=" + weight +
-            '}';
-    }
-
     public int getBreed() {
         return breed;
     }
 
     public int getWeight() {
         return weight;
+    }
+
+    @Override
+    public String toString() {
+        return "Dog{" +
+            "breed=" + breed +
+            ", weight=" + weight +
+            '}';
     }
 }

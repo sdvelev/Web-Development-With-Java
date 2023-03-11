@@ -28,14 +28,17 @@ public class TaskFour {
         System.out.println(list);
 
         List<Integer> list2 = new ArrayList<>();
+
         list2.add(5);
         list2.add(4);
         list2.add(13);
 
         list2.sort(Integer::compareTo);
+
         System.out.println(list2);
 
         List<String> list3 = new ArrayList<>();
+
         list3.add("El1");
         list3.add("El3");
         list3.add("El2");

@@ -5,11 +5,13 @@ import java.util.List;
 
 public class TaskTwo {
 
+    private final static int THIRD_ELEMENT = 3;
+
     public static void removeThirdElementFromList(List<String> list) {
 
-        if (list.size() <= 3) {
+        if (list.size() >= THIRD_ELEMENT) {
 
-            list.remove(2);
+            list.remove(THIRD_ELEMENT - 1);
         }
 
     }

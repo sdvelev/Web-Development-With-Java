@@ -12,7 +12,7 @@ public class TaskSeven {
 
     public static List<FlightLeg> extractFlightLegs(Map<String, List<FlightLeg>> collection, String airport) {
 
-        Set<FlightLeg> toReturn = new HashSet<>();
+        List<FlightLeg> toReturn = new ArrayList<>();
 
         for (Map.Entry<String, List<FlightLeg>> currentEntry : collection.entrySet()) {
 
@@ -25,7 +25,7 @@ public class TaskSeven {
             }
         }
 
-        return toReturn.stream().toList();
+        return toReturn;
     }
 
 
@@ -38,6 +38,7 @@ public class TaskSeven {
         FlightLeg flightLeg3 = new FlightLeg("LBSF", "KSDI", LocalDate.now());
 
         List<FlightLeg> flightLegs = new ArrayList<>();
+
         flightLegs.add(flightLeg1);
         flightLegs.add(flightLeg2);
         flightLegs.add(flightLeg3);
@@ -47,5 +48,4 @@ public class TaskSeven {
         System.out.println(extractFlightLegs(collection, "LBSF"));
         System.out.println(extractFlightLegs(collection, "KSDI"));
     }
-
 }

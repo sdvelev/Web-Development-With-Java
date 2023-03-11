@@ -14,6 +14,7 @@ public class TaskSix {
     public static void main(String[] args) {
 
         Map<Integer, String> map = new HashMap<>();
+
         map.put(1, "El1");
         map.put(3, "El3");
         map.put(2, "El2");
