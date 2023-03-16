@@ -26,7 +26,6 @@ public class CarRepository {
 
     public List<Car> searchCars(String make, String model, int year, double price) {
 
-
         return this.carInventory.stream()
             .filter(car -> car.getMake().equals(make) &&
                 car.getModel().equals(model) &&

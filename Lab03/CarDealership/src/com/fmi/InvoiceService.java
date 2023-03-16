@@ -29,17 +29,8 @@ public class InvoiceService {
 
     public double calculateTotalPrice() {
 
-       // double result = 0;
-
         return this.getInvoiceHistory().stream()
             .reduce(0.0, (result, current) -> result  + current.getTotalPrice(), Double::sum);
-
-       /* for (Invoice invoice : this.getInvoiceHistory()) {
-
-            result += invoice.getSalesPrice() * (1 + invoice.getTaxRate() / 100.0);
-        }
-
-        return result;*/
     }
 
 }
