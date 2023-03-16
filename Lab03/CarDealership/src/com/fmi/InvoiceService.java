@@ -6,6 +6,10 @@ public class InvoiceService {
 
     private InvoiceRepository invoiceRepository;
 
+    public InvoiceService() {
+        this.invoiceRepository = new InvoiceRepository();
+    }
+
     public InvoiceService(InvoiceRepository invoiceRepository) {
         this.invoiceRepository = invoiceRepository;
     }
@@ -18,16 +22,24 @@ public class InvoiceService {
         return this.invoiceRepository.getInvoiceHistory();
     }
 
+    public void printInvoice(Invoice invoice) {
+
+        System.out.println(invoice);
+    }
+
     public double calculateTotalPrice() {
 
-        double result = 0;
+       // double result = 0;
 
-        for (Invoice invoice : this.getInvoiceHistory()) {
+        return this.getInvoiceHistory().stream()
+            .reduce(0.0, (result, current) -> result  + current.getTotalPrice(), Double::sum);
+
+       /* for (Invoice invoice : this.getInvoiceHistory()) {
 
             result += invoice.getSalesPrice() * (1 + invoice.getTaxRate() / 100.0);
         }
 
-        return result;
+        return result;*/
     }
 
 }

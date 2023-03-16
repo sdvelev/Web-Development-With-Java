@@ -1,14 +1,12 @@
 package com.fmi;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CarRepository {
 
-    private List<Car> carInventory;
+    private final List<Car> carInventory;
 
     public CarRepository() {
         this.carInventory = new ArrayList<>();
@@ -35,35 +33,6 @@ public class CarRepository {
                 car.getYear() == year &&
                 car.getPrice() == price)
             .collect(Collectors.toList());
-
-       /* List<Car> toReturnList = new ArrayList<>();
-
-        for (Car currentCar : this.carInventory) {
-
-            boolean toAdd = true;
-
-            if (make != null && !currentCar.getMake().equals(make)) {
-                toAdd = false;
-            }
-
-            if (model != null && !currentCar.getModel().equals(model)) {
-                toAdd = false;
-            }
-
-            if (currentCar.getYear() != year) {
-                toAdd = false;
-            }
-
-            if (currentCar.getPrice() != price) {
-                toAdd = false;
-            }
-
-            if (toAdd) {
-                toReturnList.add(currentCar);
-            }
-        }
-
-        return toReturnList;*/
     }
 
     public List<Car> getAllCars() {

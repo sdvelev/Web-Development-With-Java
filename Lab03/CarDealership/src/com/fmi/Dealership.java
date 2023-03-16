@@ -1,15 +1,15 @@
 package com.fmi;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class Dealership {
 
-    private String name;
-    private CarService carService;
-    private InvoiceService invoiceService;
+    private final String name;
+    private final CarService carService;
+    private final InvoiceService invoiceService;
 
     public Dealership(String name) {
         this.name = name;
@@ -40,7 +40,7 @@ public class Dealership {
     }
 
     public void printInvoice(Invoice invoice) {
-        this.carService.printInvoice(invoice);
+        this.invoiceService.printInvoice(invoice);
     }
 
     public Map<String, Integer> getSalesByMake() {
@@ -49,10 +49,10 @@ public class Dealership {
 
         for (Invoice currentInvoice : this.invoiceService.getInvoiceHistory()) {
 
-            if (toReturnMap.containsKey(currentInvoice.getCar().getMake())) {
+            if (!toReturnMap.containsKey(currentInvoice.getCar().getMake())) {
                 toReturnMap.put(currentInvoice.getCar().getMake(), 1);
             } else {
-                toReturnMap.put(currentInvoice.getCar().getMake(), toReturnMap.get(currentInvoice.getCar().getMake() + 1));
+                toReturnMap.put(currentInvoice.getCar().getMake(), toReturnMap.get(currentInvoice.getCar().getMake()) + 1);
             }
         }
 
@@ -62,6 +62,38 @@ public class Dealership {
     public double getTotalRevenue() {
 
         return this.invoiceService.calculateTotalPrice();
+    }
+
+    public static void main(String[] args) {
+
+        Car a = new Car("make1", "model1", 2023, 120_000);
+        Car b = new Car("make2", "model2", 2018, 60_000);
+        Car c = new Car("make3", "model3", 2020, 100_000);
+
+        CarService carService = new CarService();
+        carService.addCar(a);
+        carService.addCar(b);
+
+        Invoice forA = new Invoice("customer1", LocalDate.of(2023, 3, 16), a,
+            a.getPrice(), 20);
+        Invoice forB = new Invoice("customer2", LocalDate.of(2023, 2, 16), b,
+            b.getPrice(), 20);
+
+        InvoiceService invoiceService = new InvoiceService();
+        invoiceService.addInvoice(forA);
+        invoiceService.addInvoice(forB);
+
+        Dealership dealership = new Dealership("name", carService, invoiceService);
+
+        dealership.addCar(c);
+
+        System.out.println(dealership.getSalesByMake());
+
+        dealership.sellCar(c,"customer3", 10);
+
+        System.out.println(dealership.getSalesByMake());
+
+        System.out.println(dealership.getTotalRevenue());
     }
 
 }

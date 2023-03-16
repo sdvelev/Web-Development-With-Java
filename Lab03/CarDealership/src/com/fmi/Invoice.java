@@ -20,7 +20,7 @@ public class Invoice {
         this.taxRate = taxRate;
     }
 
-    private double getTotalPrice() {
+    public double getTotalPrice() {
         return this.salesPrice * (1 + this.taxRate / 100.0);
     }
 

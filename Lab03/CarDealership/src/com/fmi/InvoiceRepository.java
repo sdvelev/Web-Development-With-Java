@@ -5,7 +5,7 @@ import java.util.List;
 
 public class InvoiceRepository {
 
-    private List<Invoice> invoiceRepository;
+    private final List<Invoice> invoiceRepository;
 
     public InvoiceRepository() {
         this.invoiceRepository = new ArrayList<>();
