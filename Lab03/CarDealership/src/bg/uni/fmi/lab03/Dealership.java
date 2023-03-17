@@ -1,4 +1,4 @@
-package com.fmi;
+package bg.uni.fmi.lab03;
 
 import java.time.LocalDate;
 import java.util.HashMap;

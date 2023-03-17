@@ -1,4 +1,4 @@
-package com.fmi;
+package bg.uni.fmi.lab03;
 
 public class Car {
 

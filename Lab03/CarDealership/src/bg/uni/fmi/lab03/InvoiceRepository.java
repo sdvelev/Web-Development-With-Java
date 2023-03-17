@@ -1,4 +1,4 @@
-package com.fmi;
+package bg.uni.fmi.lab03;
 
 import java.util.ArrayList;
 import java.util.List;
