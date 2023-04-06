@@ -17,12 +17,6 @@ public class Dealership {
     private final CarService carService;
     private final InvoiceService invoiceService;
 
-    public Dealership(String name) {
-        this.name = name;
-        this.carService = new CarService(new CarRepository());
-        this.invoiceService = new InvoiceService(new InvoiceRepository());
-    }
-
     @Autowired
     public Dealership(String name, CarService carService, InvoiceService invoiceService) {
         this.name = name;

@@ -1,9 +1,11 @@
 package bg.fmi.course.wdwj.service.impl;
 
+import bg.fmi.course.wdwj.config.AppConfig;
 import bg.fmi.course.wdwj.logger.Logger;
 import bg.fmi.course.wdwj.model.Book;
 import bg.fmi.course.wdwj.repository.BookRepository;
 import bg.fmi.course.wdwj.service.BookService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,26 +15,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
 
+@Slf4j
 @Service
 public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
     private final Logger logger;
+    private final AppConfig appConfig;
 
     @Autowired
-    public BookServiceImpl(BookRepository bookRepository) {
+    public BookServiceImpl(BookRepository bookRepository, Logger logger, AppConfig appConfig) {
         this.bookRepository = bookRepository;
+        this.logger = logger;
+        this.appConfig = appConfig;
     }
 
-    /**
-     * Add book to the store
-     *
-     * @param book is the book which we want to add
-     * @return true is the book is add successful and false is the book is already exists
-     */
     @Override
     public boolean add(Book book) {
-
         Book bookByIsbn = bookRepository.getByIsbn(book.getIsbn());
         if (bookByIsbn != null) {
             return false;
@@ -42,23 +41,15 @@ public class BookServiceImpl implements BookService {
         return true;
     }
 
-    /**
-     * Remove specific book from the store
-     *
-     * @param book is the book which we want to remove
-     */
     @Override
-    public void remove(Book book) {
+    public void remove(Book o) {
+        logger.info("remove");
 
-        bookRepository.remove(book);
+        log.info("remove");
+
+        logger.info(appConfig.getLogger().getName());
     }
 
-    /**
-     * Get all books by Author
-     *
-     * @param author
-     * @return
-     */
     @Override
     public List<Book> getAllBooksByAuthor(String author) {
         if (author == null || author.isBlank()) {
@@ -68,65 +59,37 @@ public class BookServiceImpl implements BookService {
         return bookRepository.getAllBooksByAuthor(author);
     }
 
-    /**
-     * Get all books publish after specific year
-     *
-     * @param from
-     * @return
-     */
     @Override
     public List<Book> getAllBooksPublishedAfter(LocalDate from) {
-        return bookRepository.getAllBooksPublishedAfter(from);
+        return null;
     }
 
-    /**
-     * Return all books between two dates
-     *
-     * @param from
-     * @param to
-     * @return
-     */
     @Override
     public List<Book> getAllBooksBetween(LocalDate from, LocalDate to) {
-        return bookRepository.getAllBooksBetween(from, to);
+        return null;
     }
 
-    /**
-     * Clear the whole book store
-     */
     @Override
     public void clear() {
-        bookRepository.clear();
+        logger.debug(">>>>>>>>>> clear");
+
+        logger.info(appConfig.getLogger().getName());
+
+        logger.info(appConfig.getDealership().getMaxTaxRate());
     }
 
-    /**
-     * Return all books grouped by author
-     *
-     * @return
-     */
     @Override
     public Map<String, List<Book>> getAllBooksGroupByAuthor() {
-        return bookRepository.getAllBooksGroupByAuthor();
+        return null;
     }
 
-    /**
-     * Return all books grouped by publisher
-     *
-     * @return
-     */
     @Override
     public Map<String, List<Book>> getAllBooksGroupByPublisher() {
-        return bookRepository.getAllBooksGroupByPublisher();
+        return null;
     }
 
-    /**
-     * Filter books by given filter
-     *
-     * @param bookPredicate
-     * @return
-     */
     @Override
     public List<Book> getAllBooksFilterBy(Predicate<Book> bookPredicate) {
-        return bookRepository.getAllBooksFilterBy(bookPredicate);
+        return null;
     }
 }
