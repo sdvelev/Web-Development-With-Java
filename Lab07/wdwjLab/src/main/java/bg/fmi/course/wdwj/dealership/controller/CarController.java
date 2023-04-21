@@ -1,5 +1,6 @@
 package bg.fmi.course.wdwj.dealership.controller;
 
+import bg.fmi.course.wdwj.dealership.dto.CarDto;
 import bg.fmi.course.wdwj.dealership.model.Car;
 import bg.fmi.course.wdwj.dealership.model.Invoice;
 import bg.fmi.course.wdwj.dealership.service.CarService;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/cars")
@@ -30,19 +32,24 @@ public class CarController {
     }
 
     @GetMapping
-    public List<Car> getAllCars() {
-        return this.carService.getAllCars();
+    public List<CarDto> getAllCars() {
+        return this.carService.getAllCars().stream()
+            .map(car -> new CarDto(car.getMake(), car.getModel(), car.getYear(), car.getPrice()))
+            .collect(Collectors.toList());
     }
 
     @PostMapping
-    public void addCar(@Valid @NotNull @RequestBody Car car) {
-        carService.addCar(car);
+    public void addCar(@Valid @NotNull @RequestBody CarDto car) {
+        carService.addCar(new Car(car.getMake(), car.getModel(), car.getYear(), car.getPrice()));
     }
 
     @GetMapping("/search")
-    public List<Car> searchCars(@RequestParam("make") String make, @RequestParam("model") String model,
+    public List<CarDto> searchCars(@RequestParam("make") String make, @RequestParam("model") String model,
                                 @RequestParam("year") int year, @RequestParam("price") BigDecimal price) {
-        return this.carService.searchCars(make, model, year, price);
+        return this.carService.searchCars(make, model, year, price)
+            .stream()
+            .map(car -> new CarDto(car.getMake(), car.getModel(), car.getYear(), car.getPrice()))
+            .collect(Collectors.toList());
     }
 
     @DeleteMapping

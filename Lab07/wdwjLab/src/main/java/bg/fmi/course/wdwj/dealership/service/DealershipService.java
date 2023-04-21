@@ -1,6 +1,7 @@
 package bg.fmi.course.wdwj.dealership.service;
 
 import bg.fmi.course.wdwj.dealership.ResourceNotFoundException;
+import bg.fmi.course.wdwj.dealership.controller.validation.ApiBadRequest;
 import bg.fmi.course.wdwj.dealership.model.Car;
 import bg.fmi.course.wdwj.dealership.model.Dealership;
 import bg.fmi.course.wdwj.dealership.model.Invoice;
@@ -30,6 +31,14 @@ public class DealershipService {
         if (dealership == null) {
             throw new IllegalArgumentException("Incorrect data");
         }
+
+        final List<Dealership> all = dealershipRepository.getAll();
+        for (Dealership dealershipEntity: all) {
+            if(dealershipEntity.getName().equals(dealership.getName())) {
+                throw new ApiBadRequest("Dealership already exists");
+            }
+        }
+
         dealershipRepository.addDealership(dealership);
     }
 
@@ -46,24 +55,12 @@ public class DealershipService {
         return dealershipRepository.getAll();
     }
 
-    public void addCar(Car car) {
-        carService.addCar(car);
-    }
-
-    public void removeCar(Car car) {
-        carService.removeCar(car);
-    }
-
-    public List<Car> searchCars(String make, String model, int year, BigDecimal price) {
-        return carService.searchCars(make, model, year, price);
-    }
-
-    public void sellCar(Car car, String customerName) {
+  /*  public void sellCar(Car car, String customerName) {
         Invoice invoice = new Invoice(customerName, LocalDate.now(), car, car.getPrice(), BigDecimal.valueOf(0.2));
         invoiceService.addInvoice(invoice);
         carService.removeCar(car);
         System.out.println("Car sold to " + customerName + " for " + invoice.getTotalPrice());
-    }
+    }*/
 
     public void printInvoice(Invoice invoice) {
         System.out.println(invoice.toString());
