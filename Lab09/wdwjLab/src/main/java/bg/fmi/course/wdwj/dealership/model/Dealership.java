@@ -47,6 +47,34 @@ public class Dealership {
     @Column
     private String email;
 
+    public Long getId() {
+        return id;
+    }
+
+    public List<Car> getCars() {
+        return cars;
+    }
+
+    public List<SalesPerson> getSalesPeople() {
+        return salesPeople;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

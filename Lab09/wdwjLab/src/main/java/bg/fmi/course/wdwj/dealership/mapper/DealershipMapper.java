@@ -15,6 +15,8 @@ public interface DealershipMapper {
 
     DealershipDto toDto (Dealership model);
 
+    Dealership toEntity (DealershipDto model);
+
     //@Mapping()
     List<DealershipDto> toList(List<Dealership> entities);
 }

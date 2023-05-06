@@ -27,11 +27,12 @@ public class CarService {
 
     public Long addCar(Car car) {
 
-        // TODO: Check if car already exists for make/model/year
-
         return carRepository.save(car).getId();
     }
 
+
+
+    /*
     public void removeCar(Car car) {
 //        carRepository.removeCar(car);
 
@@ -40,7 +41,7 @@ public class CarService {
     public List<Car> searchCars(String make, String model, int year, double price) {
 ////carRepository.searchCars(make, model, year, price);
         return null;
-    }
+    }*/
 
     public List<Car> getAllCars() {
         return carRepository.findAll();

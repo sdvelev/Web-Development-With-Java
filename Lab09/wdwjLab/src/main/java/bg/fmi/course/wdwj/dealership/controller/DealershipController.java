@@ -1,9 +1,11 @@
 package bg.fmi.course.wdwj.dealership.controller;
 
 import bg.fmi.course.wdwj.dealership.controller.validation.ApiBadRequest;
+import bg.fmi.course.wdwj.dealership.dto.CarDto;
 import bg.fmi.course.wdwj.dealership.dto.DealershipDto;
 import bg.fmi.course.wdwj.dealership.mapper.DealershipMapper;
 import bg.fmi.course.wdwj.dealership.model.Dealership;
+import bg.fmi.course.wdwj.dealership.service.CarService;
 import bg.fmi.course.wdwj.dealership.service.DealershipService;
 import bg.fmi.course.wdwj.logger.Logger;
 import jakarta.validation.Valid;
@@ -29,4 +31,18 @@ import java.util.stream.Collectors;
 //@AllArgsConstructor
 public class DealershipController {
 
+    private DealershipService dealershipService;
+
+    private DealershipMapper dealershipMapper;
+
+    @GetMapping
+    public List<DealershipDto> getDealerships() {
+        return dealershipMapper.toList(dealershipService.getDealerships());
+    }
+
+    @PostMapping
+    public void addDealership(@Valid @NotNull @RequestBody DealershipDto dealershipDto) {
+
+        dealershipService.addDealership(dealershipMapper.toEntity(dealershipDto));
+    }
 }

@@ -13,6 +13,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
@@ -20,7 +21,6 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 @Entity
-@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -44,6 +44,34 @@ public class Car {
 
     @Column
     private int year;
+
+    public Long getId() {
+        return id;
+    }
+
+    public Dealership getDealership() {
+        return dealership;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
 
     @Column
     private String color;

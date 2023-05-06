@@ -34,4 +34,32 @@ public class CarDto {
 
     @JsonProperty("price")
     private BigDecimal price;
+
+    public Long getId() {
+        return id;
+    }
+
+    public Long getDealershipId() {
+        return dealershipId;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
 }

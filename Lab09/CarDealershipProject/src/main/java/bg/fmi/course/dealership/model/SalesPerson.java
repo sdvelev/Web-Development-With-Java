@@ -1,4 +1,5 @@
-package bg.fmi.course.wdwj.dealership.model;
+package bg.fmi.course.dealership.model;
+
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,38 +11,39 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.Set;
 
-@Data
 @Entity
 @Table(name = "sales_person")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class SalesPerson {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
+    @Column(name = "id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dealership_id")
     private Dealership dealership;
 
-    @OneToMany(mappedBy = "sales")
-    private List<Sale> sales;
+    @OneToMany(mappedBy = "salesPerson")
+    private Set<Sale> sales;
 
-    @Column
-    private String name;
-
-    @Column
+    @Column(name = "email")
     private String email;
 
-    @Column
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "phone_number")
     private String phoneNumber;
 
-
-
 }
-
-
