@@ -13,4 +13,7 @@ public interface CarRepository extends JpaRepository<Car, Long> {
     public List<Car> findByMakeAndModelAndYearAndPriceLessThanEqual(String make, String model, int year,
                                                                     BigDecimal price);
 
+    public List<Car> findByMakeAndModelAndYearAndPrice(String make, String model, int year,
+                                                                    BigDecimal price);
+
 }

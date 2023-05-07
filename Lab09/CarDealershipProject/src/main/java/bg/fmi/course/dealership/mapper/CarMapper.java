@@ -24,6 +24,17 @@ public class CarMapper {
             .build();
     }
 
+    public Car toEntity(CarDto carDto) {
+        return Car.builder()
+            .id(carDto.getId())
+            .color(carDto.getColor())
+            .make(carDto.getMake())
+            .model(carDto.getModel())
+            .price(carDto.getPrice())
+            .year(carDto.getYear())
+            .build();
+    }
+
     public Car toEntity(CarDto carDto, Dealership dealership) {
         return Car.builder()
             .id(carDto.getId())

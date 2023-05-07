@@ -1,5 +1,6 @@
 package bg.fmi.course.dealership.service;
 
+import bg.fmi.course.dealership.ResourceNotFoundException;
 import bg.fmi.course.dealership.dto.CarDto;
 import bg.fmi.course.dealership.mapper.CarMapper;
 import bg.fmi.course.dealership.model.Car;
@@ -28,11 +29,16 @@ public class CarService {
     }
 
     public void removeCar(Car car) {
+
         carRepository.delete(car);
     }
 
-    public List<Car> searchCars(String brand, String model, int year, double price) {
+    public List<Car> searchCarsPriceLessThan(String brand, String model, int year, double price) {
         return carRepository.findByMakeAndModelAndYearAndPriceLessThanEqual(brand, model, year, new BigDecimal(price));
+    }
+
+    public List<Car> searchCars(String brand, String model, int year, double price) {
+        return carRepository.findByMakeAndModelAndYearAndPrice(brand, model, year, new BigDecimal(price));
     }
 
     public List<Car> getAllCars() {
@@ -42,6 +48,8 @@ public class CarService {
     public Car constructCarEntityBy(CarDto carDto, Dealership dealership) {
         return carMapper.toEntity(carDto, dealership);
     }
+
+
 
     /*
     public Invoice sellCar(Car car, String customerName) {
