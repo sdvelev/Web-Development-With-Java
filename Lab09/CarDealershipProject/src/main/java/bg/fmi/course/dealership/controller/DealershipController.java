@@ -2,6 +2,7 @@ package bg.fmi.course.dealership.controller;
 
 import bg.fmi.course.dealership.dto.CarDto;
 import bg.fmi.course.dealership.dto.DealershipDto;
+import bg.fmi.course.dealership.dto.SalesPersonDto;
 import bg.fmi.course.dealership.mapper.DealershipMapper;
 import bg.fmi.course.dealership.service.DealershipService;
 import jakarta.validation.Valid;
@@ -41,5 +42,10 @@ public class DealershipController {
     @PostMapping(path = "/cars")
     public Long addCarToDealership(@Valid @NotNull @RequestBody CarDto carDto) {
         return dealershipService.addCarToDealership(carDto.getDealershipId(), carDto);
+    }
+
+    @PostMapping(path = "/salesPeople")
+    public Long addSalesPersonToDealership(@Valid @NotNull @RequestBody SalesPersonDto salesPersonDto) {
+        return dealershipService.addSalesPersonToDealership(salesPersonDto.getDealershipId(), salesPersonDto);
     }
 }

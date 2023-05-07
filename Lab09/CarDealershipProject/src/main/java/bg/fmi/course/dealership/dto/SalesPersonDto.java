@@ -1,8 +1,9 @@
-package bg.fmi.course.dealership.model;
+package bg.fmi.course.dealership.dto;
 
-
+import bg.fmi.course.dealership.model.Dealership;
+import bg.fmi.course.dealership.model.Sale;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,8 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,33 +18,27 @@ import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
-@Entity
-@Table(name = "sales_person")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SalesPerson {
+public class SalesPersonDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @JsonProperty("id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "dealership_id")
-    private Dealership dealership;
+    @JsonProperty("dealershipId")
+    private Long dealershipId;
 
-    @OneToMany(mappedBy = "salesPerson")
+    @JsonProperty("sales")
     private Set<Sale> sales;
 
-    @Column(name = "email")
+    @JsonProperty("email")
     private String email;
 
-    @Column(name = "name")
+    @JsonProperty("name")
     private String name;
 
-    @Column(name = "phone_number")
+    @JsonProperty("phoneNumber")
     private String phoneNumber;
-
 }

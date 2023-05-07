@@ -2,11 +2,15 @@ package bg.fmi.course.dealership.service;
 
 import bg.fmi.course.dealership.ResourceNotFoundException;
 import bg.fmi.course.dealership.dto.CarDto;
+import bg.fmi.course.dealership.dto.SalesPersonDto;
 import bg.fmi.course.dealership.mapper.CarMapper;
 import bg.fmi.course.dealership.mapper.DealershipMapper;
+import bg.fmi.course.dealership.mapper.SalesPersonMapper;
 import bg.fmi.course.dealership.model.Car;
 import bg.fmi.course.dealership.model.Dealership;
+import bg.fmi.course.dealership.model.SalesPerson;
 import bg.fmi.course.dealership.repository.DealershipRepository;
+import bg.fmi.course.dealership.repository.SalesPersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,14 +28,18 @@ public class DealershipService {
 
     private final CarService carService;
     private final InvoiceService invoiceService;
+    private final SalesPersonService salesPersonService;
     private final DealershipRepository dealershipRepository;
+    private final SalesPersonRepository salesPersonRepository;
 
     @Autowired
-    public DealershipService(CarService carService, InvoiceService invoiceService,
-                             DealershipRepository dealershipRepository) {
+    public DealershipService(CarService carService, InvoiceService invoiceService, SalesPersonService salesPersonService,
+                             DealershipRepository dealershipRepository, SalesPersonRepository salesPersonRepository) {
         this.carService = carService;
         this.invoiceService = invoiceService;
+        this.salesPersonService = salesPersonService;
         this.dealershipRepository = dealershipRepository;
+        this.salesPersonRepository = salesPersonRepository;
     }
 
     public boolean addDealership(Dealership dealership) {
@@ -82,6 +90,22 @@ public class DealershipService {
 
         dealershipToWorkWith.getCars().add(carToSave);
         return carService.addCar(carToSave);
+    }
+
+    public Long addSalesPersonToDealership(Long id, SalesPersonDto salesPersonDto) {
+
+        Optional<Dealership> dealershipResult = dealershipRepository.findById(id);
+
+        if (!dealershipResult.isPresent()) {
+            throw new ResourceNotFoundException("Dealership with such id is missing");
+        }
+
+        Dealership dealershipToWorkWith = dealershipResult.get();
+        SalesPerson salesPersonToSave = salesPersonService.constructSalesPersonEntityBy(salesPersonDto);
+
+        salesPersonToSave.setDealership(dealershipToWorkWith);
+        dealershipToWorkWith.getSalesPeople().add(salesPersonToSave);
+        return salesPersonService.addSalesPerson(salesPersonToSave);
     }
 
     /*  public void sellCar(Car car, String customerName) {
