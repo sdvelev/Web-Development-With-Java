@@ -12,10 +12,16 @@ import org.springframework.stereotype.Component;
 public class CarMapper {
 
     public CarDto toDto(Car entity) {
+
+        CarDto toReturn = new CarDto();
+
+        if (entity.getSale() != null) {
+            toReturn.setSaleId(entity.getSale().getId());
+        }
+
         return CarDto.builder()
             .id(entity.getId())
             .dealershipId(entity.getDealership().getId())
-            .saleId(entity.getSale().getId())
             .make(entity.getMake())
             .model(entity.getModel())
             .year(entity.getYear())

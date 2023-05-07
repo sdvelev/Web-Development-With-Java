@@ -16,7 +16,7 @@ public class DealershipDto {
     @JsonProperty("id")
     private Long id;
 
-    @JsonProperty("dealershipName")
+    @JsonProperty("name")
     @NotBlank(message = "Name should exist")
     private String name;
 

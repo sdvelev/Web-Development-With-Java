@@ -23,7 +23,7 @@ public class CarDto {
     @JsonProperty("saleId")
     private Long saleId;
 
-    @JsonProperty("make")
+    @JsonProperty("brand")
     private String make;
 
     @JsonProperty("model")

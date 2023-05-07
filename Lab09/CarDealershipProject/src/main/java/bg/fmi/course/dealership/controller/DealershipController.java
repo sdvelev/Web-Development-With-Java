@@ -1,5 +1,6 @@
 package bg.fmi.course.dealership.controller;
 
+import bg.fmi.course.dealership.dto.CarDto;
 import bg.fmi.course.dealership.dto.DealershipDto;
 import bg.fmi.course.dealership.mapper.DealershipMapper;
 import bg.fmi.course.dealership.service.DealershipService;
@@ -37,5 +38,8 @@ public class DealershipController {
         dealershipService.addDealership(dealershipMapper.toEntity(dealershipDto));
     }
 
-
+    @PostMapping(path = "/cars")
+    public Long addCarToDealership(@Valid @NotNull @RequestBody CarDto carDto) {
+        return dealershipService.addCarToDealership(carDto.getDealershipId(), carDto);
+    }
 }
