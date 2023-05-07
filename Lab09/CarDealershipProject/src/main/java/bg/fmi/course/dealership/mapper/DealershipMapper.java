@@ -5,7 +5,12 @@ import bg.fmi.course.dealership.dto.DealershipDto;
 import bg.fmi.course.dealership.model.Car;
 import bg.fmi.course.dealership.model.Dealership;
 import bg.fmi.course.dealership.model.Sale;
+import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Component
 public class DealershipMapper {
 
     public DealershipDto toDto(Dealership entity) {
@@ -26,6 +31,12 @@ public class DealershipMapper {
             .name(dealershipDto.getName())
             .phoneNumber(dealershipDto.getPhoneNumber())
             .build();
+    }
+
+    public List<DealershipDto> toDtoList(List<Dealership> dealerships) {
+        return dealerships.stream()
+            .map(this::toDto)
+            .collect(Collectors.toList());
     }
 
 }
